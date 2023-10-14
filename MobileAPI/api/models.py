@@ -27,7 +27,7 @@ class Pereval(models.Model):
     connect = models.CharField(max_length=255, blank=True)
     add_time = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    coord_id = models.ForeignKey('Coords', on_delete=models.CASCADE)
+    coordinates = models.ForeignKey('Coords', on_delete=models.CASCADE)
     levels = models.ForeignKey('Level', blank=True, on_delete=models.PROTECT)
     status = models.CharField(max_length=2, choices=STATUSES, default='NW')
 
@@ -55,7 +55,7 @@ class Coords(models.Model):
 
 
 class Images(models.Model):
-    pereval_id = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
+    pereval = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     created = models.DateTimeField(auto_now_add=True)
     data = models.BinaryField()
