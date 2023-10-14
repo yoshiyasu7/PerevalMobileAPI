@@ -28,7 +28,7 @@ class ImagesSerializer(serializers.ModelSerializer):
 
 class PerevalSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    coord_id = CoordsSerializer(read_only=True)
+    coordinates = CoordsSerializer(read_only=True)
     levels = LevelSerializer(read_only=True)
     images = ImagesSerializer(many=True, read_only=True, required=False)
 
