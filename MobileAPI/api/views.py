@@ -109,3 +109,11 @@ class PerevalAPIViewSet(viewsets.ViewSet):
         except:
             return Response({'message': 'Such a record does not exist', 'id': None}, status=404)
 
+    def get_user_perevals(self, request, **kwargs):
+        try:
+            user = User.objects.get(email=request.GET['user__email'])
+            perevals = Pereval.objects.filter(user=user)
+            data = PerevalSerializer(perevals, many=True).data
+            return Response(data, status=200)
+        except:
+            return Response({'message': 'Records not found'}, status=200)
