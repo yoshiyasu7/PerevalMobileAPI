@@ -66,10 +66,19 @@ class PerevalAPIViewSet(viewsets.ViewSet):
                 return self.response_serializer_error(main_serializer.errors)
 
             for i in images:
-                i['pereval'] = new_pereval.id
+                i['pereval_id'] = new_pereval.id
                 self.add_dependence(ImagesSerializer(data=i))
 
             return Response({'message': 'Success', 'id': new_pereval.id}, status=201)
 
         except Exception as e:
             return Response({'message': str(e), 'id': None}, status=500)
+
+    def get_pereval(self, request, **kwargs):
+        try:
+            pereval = Pereval.objects.get(pk=kwargs['pk'])
+            data = PerevalSerializer(pereval).data
+            return Response(data, status=200)
+        except:
+            return Response({'message': 'Such a record does not exist', 'id': None}, status=404)
+

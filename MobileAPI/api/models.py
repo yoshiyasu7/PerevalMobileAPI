@@ -55,7 +55,7 @@ class Coords(models.Model):
 
 
 class Images(models.Model):
-    pereval = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
+    pereval_id = models.ForeignKey(Pereval, related_name='images', on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     created = models.DateTimeField(auto_now_add=True)
     data = models.BinaryField()
