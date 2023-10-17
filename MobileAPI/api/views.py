@@ -82,3 +82,30 @@ class PerevalAPIViewSet(viewsets.ViewSet):
         except:
             return Response({'message': 'Such a record does not exist', 'id': None}, status=404)
 
+    def edit_pereval(self, request, **kwargs):
+        try:
+            pereval = Pereval.objects.get(pk=kwargs['pk'])
+            if pereval.status == 'new':
+                data = request.data
+                data.pop('user')
+                images = data.pop('images')
+                serializers = [CoordsSerializer(Coords.objects.get(id=pereval.coordinates),
+                                                data=data.pop('coordinates')),
+                               LevelSerializer(Level.objects.get(id=pereval.levels),
+                                               data=data.pop('levels')),
+                               PerevalSerializer(pereval, data=data)]
+                Images.objects.filter(pereval_id=pereval.id).delete()
+                for i in images:
+                    i['pereval_id'] = pereval.id
+                    serializers.append(ImagesSerializer(data=i))
+                for s in serializers:
+                    if s.is_valid():
+                        s.save()
+                    else:
+                        return self.response_serializer_error(s.errors, 'state')
+                return Response({'message': 'Success', 'state': 1}, status=200)
+            else:
+                return Response({'message': 'Status is not "new"', 'state': 0}, status=400)
+        except:
+            return Response({'message': 'Such a record does not exist', 'id': None}, status=404)
+
