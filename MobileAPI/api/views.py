@@ -105,7 +105,7 @@ class PerevalAPIViewSet(viewsets.ViewSet):
                         return self.response_serializer_error(s.errors, 'state')
                 return Response({'message': 'Success', 'state': 1}, status=200)
             else:
-                return Response({'message': 'Status is not "new"', 'state': 0}, status=400)
+                return Response({'message': "Status is not 'new'", 'state': 0}, status=400)
         except:
             return Response({'message': 'Such a record does not exist', 'id': None}, status=404)
 
