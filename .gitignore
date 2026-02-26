@@ -1,3 +1,9 @@
 .idea/
-MobileAPI/MobileAPI/.env
 __pycache__/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+*.log

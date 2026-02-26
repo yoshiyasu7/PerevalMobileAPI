@@ -17,8 +17,8 @@ class PerevalAPIViewSet(viewsets.ViewSet):
     @staticmethod
     def response_serializer_error(errors, param='id'):
         message = ''
-        for k, v in errors.items():
-            message += f'{k}: {str(*v)}'
+        for key, value in errors.items():
+            message += f'{key}: {str(*value)}'
 
         if param == 'state':
             return Response({'message': message, 'state': 0}, status=400)

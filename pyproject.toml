@@ -1,0 +1,31 @@
+[project]
+name = "perevalmobileapi"
+version = "0.1.0"
+description = "PerevalMobileAPI project"
+authors = [
+    {name = "Maxim Shadrin",email = "max.wojw@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "django (==4.2.7)",
+    "djangorestframework (==3.14.0)",
+    "django-filter (==23.3)",
+    "drf-yasg (==1.21.7)",
+    "python-dotenv (==1.0.0)",
+    "psycopg-binary (==3.1.12)",
+    "inflection (==0.5.1)",
+    "markdown (==3.5.1)",
+    "setuptools (==68.2.2)",
+    "typing-extensions (==4.8.0)",
+    "wheel (==0.41.3)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
